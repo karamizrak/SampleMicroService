@@ -1,0 +1,23 @@
+services:
+  sourcingdb:
+    container_name: samplemicroservicedb
+    restart: always
+    volumes:
+        - ${WEBAPP_STORAGE_HOME}/site:/data/db
+        #- ./data:/data/db
+    ports:
+        - "27017:27017"
+  samplemicroservice.product:
+    container_name: "samplemicroserviceproduct"
+    environment:
+      - ASPNETCORE_ENVIRONMENT=Development
+      - ASPNETCORE_HTTP_PORTS=81
+      - "ProductDatabaseSettings:ConnectionString=mongodb://sourcingdb:27017"
+    depends_on:
+      - sourcingdb
+    ports:
+      - "8000:81"
+    volumes:
+      - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
+      - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
+      - ${HOME}/.microsoft/usersecrets/:/root/.microsoft/usersecrets

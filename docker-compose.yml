@@ -1,0 +1,8 @@
+services:
+  sourcingdb:
+    image: mongo
+  samplemicroservice.product:
+    image: ${DOCKER_REGISTRY-}samplemicroserviceproduct
+    build:
+      context: .
+      dockerfile: SampleMicroService.Product/Dockerfile
