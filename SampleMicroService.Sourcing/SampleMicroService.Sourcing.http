@@ -1,0 +1,6 @@
+@SampleMicroService.Sourcing_HostAddress = http://localhost:5022
+
+GET {{SampleMicroService.Sourcing_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###

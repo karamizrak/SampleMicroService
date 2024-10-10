@@ -12,11 +12,13 @@ services:
     environment:
       - ASPNETCORE_ENVIRONMENT=Development
       - ASPNETCORE_HTTP_PORTS=81
+      - ASPNETCORE_HTTPS_PORTS=444
       - "ProductDatabaseSettings:ConnectionString=mongodb://sourcingdb:27017"
     depends_on:
       - sourcingdb
     ports:
-      - "8000:81"
+      - "8888:81"
+      - "8889:444"
     volumes:
       - ${APPDATA}/Microsoft/UserSecrets:/home/app/.microsoft/usersecrets:ro
       - ${APPDATA}/ASP.NET/Https:/home/app/.aspnet/https:ro
